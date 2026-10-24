@@ -132,6 +132,10 @@ nav{
 .btn-secondary:hover{background:#ebebeb;transform:translateY(-2px);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
+/* ── Mobile-only line break ── */
+.m-br{display:none;}
+@media(max-width:680px){.m-br{display:inline;}}
+
 /* ── Section ── */
 section{padding:120px 6%;}
 .section-inner{max-width:1100px;margin:0 auto;}
@@ -215,6 +219,12 @@ section{padding:120px 6%;}
   .spec-icon{width:38px;height:38px;margin-bottom:14px;}
   .spec-card h3{font-size:15.5px;margin-bottom:8px;}
   .spec-card p{font-size:12.5px;line-height:1.6;}
+}
+@media(max-width:680px){
+  .spec-grid{grid-template-columns:1fr;gap:12px;}
+  .spec-card{padding:26px 24px;}
+  .spec-card h3{font-size:17px;}
+  .spec-card p{font-size:14px;line-height:1.7;}
 }
 .spec-card{
   background:var(--bg-soft);border-radius:20px;padding:36px 32px;
@@ -312,8 +322,8 @@ footer{background:#0a0a0a;color:rgba(255,255,255,.55);padding:60px 6% 36px;}
   <div class="hero-content">
     <div class="hero-tag"><span class="dot"></span>공인노무사</div>
     <h1>내 편에서 가장 든든하고<br>야무진 <em>노무 해결 파트너</em></h1>
-    <p class="tagline">부당해고, 임금체불, 인사노무 컨설팅까지 빈틈없이 해결합니다.</p>
-    <p class="hero-sub">어디서부터 시작해야 할 지 몰라도 괜찮습니다. 편하게 현재 상황을 들려주세요!</p>
+    <p class="tagline">부당해고, 임금체불, 인사노무 컨설팅까지 <br class="m-br">빈틈없이 해결합니다.</p>
+    <p class="hero-sub">어디서부터 시작해야 할 지 몰라도 괜찮습니다. <br class="m-br">편하게 현재 상황을 들려주세요!</p>
   </div>
 </section>
 
@@ -463,7 +473,7 @@ footer{background:#0a0a0a;color:rgba(255,255,255,.55);padding:60px 6% 36px;}
 
 <!-- CTA -->
 <section class="cta-banner" id="contact">
-  <h2 class="reveal">사건은 꼼꼼하게,<br>권리는 야무지게 챙겨드리겠습니다</h2>
+  <h2 class="reveal">사건은 꼼꼼하게,<br>권리는 야무지게 <br class="m-br">챙겨드리겠습니다</h2>
   <a href="contact.html" class="btn-white reveal">상담 신청하기 →</a>
 </section>
 
