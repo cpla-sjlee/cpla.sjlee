@@ -4,316 +4,369 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>이수진 노무사 | 노무법인 라움</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:        #EDE7DA;
-    --bg-card:   #E3DDD1;
-    --bg-deep:   #D8D0C4;
-    --title:     #2A3138;
-    --body:      #5C5850;
-    --point:     #A84A14;
-    --point-soft:rgba(168,74,20,0.12);
-    --footer:    #8C7B75;
-    --white:     #FFFFFF;
-    --border:    rgba(44,35,30,0.12);
-    --border-dark:rgba(44,35,30,0.22);
-  }
-  *{ margin:0; padding:0; box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  body{
-    font-family:"Noto Serif KR", "나눔명조", Georgia, serif;
-    background:var(--bg); color:var(--body); overflow-x:hidden; line-height:1.7;
-  }
-  .placeholder{
-    background:var(--point-soft);
-    border-bottom:1px dashed var(--point);
-    padding:0 3px; border-radius:2px;
-  }
+:root{
+  --bg:#ffffff;
+  --bg-soft:#f8f8f8;
+  --bg-card:#f3f3f3;
+  --title:#111111;
+  --body:#555555;
+  --muted:#999999;
+  --point:#A84A14;
+  --point-hover:#8f3d10;
+  --point-soft:rgba(168,74,20,0.08);
+  --dark:#111111;
+  --white:#ffffff;
+  --border:rgba(0,0,0,0.08);
+  --shadow:0 2px 20px rgba(0,0,0,0.07);
+  --shadow-hover:0 8px 40px rgba(0,0,0,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"42dot Sans","Pretendard","Apple SD Gothic Neo",sans-serif;
+  background:var(--bg);color:var(--body);overflow-x:hidden;line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
 
-  /* ── Progress bar ── */
-  #progress{
-    position:fixed; top:0; left:0; height:3px;
-    background:linear-gradient(90deg,var(--point),#d4733a);
-    width:0%; z-index:1000; transition:width 0.1s ease;
-  }
+/* ── Progress ── */
+#progress{position:fixed;top:0;left:0;height:2px;background:var(--point);width:0%;z-index:1000;transition:width .1s;}
 
-  /* ── Nav ── */
-  nav{
-    position:fixed; top:0; left:0; right:0; z-index:900;
-    display:flex; justify-content:space-between; align-items:center;
-    padding:22px 6%; transition:all 0.35s ease; background:transparent;
+/* ── Nav ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 6%;height:64px;
+  background:rgba(255,255,255,0.9);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  transition:all .3s;
+}
+.nav-logo{
+  color:var(--title);font-size:15px;font-weight:700;
+  display:flex;align-items:center;gap:8px;text-decoration:none;letter-spacing:-.3px;
+}
+.nav-logo .badge{
+  background:var(--point);color:#fff;font-size:10px;font-weight:700;
+  padding:2px 7px;border-radius:20px;letter-spacing:.3px;
+}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
+.nav-links a{
+  color:var(--body);text-decoration:none;font-size:14px;font-weight:500;
+  transition:color .2s;letter-spacing:-.2px;
+}
+.nav-links a:hover{color:var(--title);}
+.nav-cta{
+  background:var(--title);color:#fff;padding:9px 20px;border-radius:100px;
+  text-decoration:none;font-size:13.5px;font-weight:600;transition:all .2s;
+}
+.nav-cta:hover{background:#333;transform:translateY(-1px);}
+.nav-toggle{display:none;color:var(--title);font-size:22px;cursor:pointer;border:none;background:none;}
+@media(max-width:860px){
+  .nav-links{
+    position:fixed;top:0;right:-100%;height:100vh;width:260px;
+    background:#fff;flex-direction:column;justify-content:center;
+    gap:28px;padding:0 40px;transition:right .4s;z-index:950;
+    border-left:1px solid var(--border);
   }
-  nav.scrolled{
-    background:rgba(237,231,218,0.92);
-    backdrop-filter:blur(10px);
-    padding:14px 6%;
-    box-shadow:0 2px 20px rgba(44,35,30,0.10);
-    border-bottom:1px solid var(--border);
-  }
-  .nav-logo{
-    color:var(--title); font-size:17px; font-weight:800; letter-spacing:0.5px;
-    display:flex; align-items:center; gap:8px;
-  }
-  .nav-logo .dot{ width:6px; height:6px; background:var(--point); border-radius:50%; }
-  .nav-links{ display:flex; gap:36px; list-style:none; }
-  .nav-links a{
-    color:var(--body); text-decoration:none; font-size:14.5px;
-    letter-spacing:0.3px; position:relative; transition:color 0.25s; font-weight:500;
-  }
-  .nav-links a::after{
-    content:''; position:absolute; bottom:-6px; left:0; width:0; height:1.5px;
-    background:var(--point); transition:width 0.3s ease;
-  }
-  .nav-links a:hover{ color:var(--point); }
-  .nav-links a:hover::after{ width:100%; }
-  .nav-toggle{ display:none; color:var(--title); font-size:24px; cursor:pointer; }
+  .nav-links.open{right:0;box-shadow:-10px 0 40px rgba(0,0,0,.08);}
+  .nav-toggle{display:block;}
+  .nav-cta{display:none;}
+}
 
-  @media(max-width:820px){
-    .nav-links{
-      position:fixed; top:0; right:-100%; height:100vh; width:260px;
-      background:var(--bg); flex-direction:column; justify-content:center;
-      gap:30px; padding:0 40px; transition:right 0.4s ease; z-index:950;
-      border-left:1px solid var(--border-dark);
-    }
-    .nav-links.open{ right:0; box-shadow:-10px 0 40px rgba(44,35,30,0.12); }
-    .nav-toggle{ display:block; }
-  }
+/* ── Hero ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:120px 6% 80px;
+  background:var(--bg);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle,rgba(168,74,20,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:1;max-width:800px;}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:100px;padding:7px 16px;
+  font-size:13px;font-weight:600;color:var(--body);
+  margin-bottom:32px;opacity:0;animation:fadeUp .7s ease forwards .05s;
+}
+.hero-tag .dot{width:6px;height:6px;background:var(--point);border-radius:50%;flex-shrink:0;}
+.hero h1{
+  font-size:clamp(38px,6.5vw,76px);font-weight:800;
+  color:var(--title);letter-spacing:-2.5px;line-height:1.1;
+  margin-bottom:24px;
+  opacity:0;animation:fadeUp .7s ease forwards .15s;
+}
+.hero h1 em{color:var(--point);font-style:normal;}
+.hero p.tagline{
+  font-size:clamp(16px,2vw,19px);color:var(--body);
+  margin-bottom:12px;font-weight:400;letter-spacing:-.3px;
+  opacity:0;animation:fadeUp .7s ease forwards .25s;
+}
+.hero-sub{
+  font-size:14px;color:var(--muted);margin-bottom:44px;
+  opacity:0;animation:fadeUp .7s ease forwards .3s;
+}
+.hero-cta{
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .7s ease forwards .4s;
+}
+.btn{
+  padding:14px 28px;border-radius:100px;font-size:15px;font-weight:600;
+  cursor:pointer;border:none;transition:all .25s;text-decoration:none;
+  display:inline-block;font-family:inherit;letter-spacing:-.2px;
+}
+.btn-primary{background:var(--title);color:#fff;}
+.btn-primary:hover{background:#333;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.18);}
+.btn-secondary{background:var(--bg-card);color:var(--title);border:1px solid var(--border);}
+.btn-secondary:hover{background:#ebebeb;transform:translateY(-2px);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
-  /* ── Hero (아이보리 배경) ── */
-  .hero{
-    min-height:100vh; position:relative;
-    background:linear-gradient(150deg, #EDE7DA 0%, #E3DDD1 55%, #D8D0C4 100%);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center; color:var(--title); padding:120px 6% 80px; overflow:hidden;
-  }
-  .hero-pattern{
-    position:absolute; inset:0; opacity:0.4; pointer-events:none;
-  }
-  .hero-pattern svg{ width:100%; height:100%; }
-  .hero-content{ position:relative; z-index:2; max-width:760px; }
-  .hero-label{
-    display:inline-flex; align-items:center; gap:10px;
-    border:1px solid rgba(168,74,20,0.35); border-radius:30px;
-    padding:8px 20px; font-size:13px; letter-spacing:2px;
-    color:var(--point); margin-bottom:28px; opacity:0;
-    animation:fadeUp 0.8s ease forwards; animation-delay:0.1s;
-    background:var(--point-soft);
-  }
-  .hero h1{
-    font-size:clamp(36px,6vw,62px); font-weight:800; letter-spacing:-1px;
-    margin-bottom:18px; color:var(--title);
-    opacity:0; animation:fadeUp 0.8s ease forwards; animation-delay:0.25s; line-height:1.15;
-  }
-  .hero h1 span{ color:var(--point); }
-  .hero p.tagline{
-    font-size:clamp(15px,2vw,18px); color:var(--body);
-    margin-bottom:36px; font-weight:400; letter-spacing:0.3px;
-    opacity:0; animation:fadeUp 0.8s ease forwards; animation-delay:0.4s;
-  }
-  .hero-affil{
-    font-size:14px; color:var(--footer); margin-bottom:40px;
-    opacity:0; animation:fadeUp 0.8s ease forwards; animation-delay:0.5s;
-    letter-spacing:0.5px;
-  }
-  .hero-cta{
-    display:flex; gap:16px; justify-content:center; flex-wrap:wrap;
-    opacity:0; animation:fadeUp 0.8s ease forwards; animation-delay:0.6s;
-  }
-  .btn{
-    padding:14px 32px; border-radius:4px; font-size:14.5px; font-weight:700;
-    letter-spacing:0.5px; cursor:pointer; border:none; transition:all 0.3s ease;
-    text-decoration:none; display:inline-block;
-  }
-  .btn-primary{ background:var(--point); color:#fff; }
-  .btn-primary:hover{ background:#8f3d10; transform:translateY(-2px); box-shadow:0 10px 24px rgba(168,74,20,0.28); }
-  .btn-outline{ background:transparent; color:var(--title); border:1.5px solid var(--border-dark); }
-  .btn-outline:hover{ border-color:var(--point); color:var(--point); transform:translateY(-2px); }
+/* ── Section ── */
+section{padding:120px 6%;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-label{
+  font-size:12.5px;font-weight:700;color:var(--point);
+  letter-spacing:2px;margin-bottom:16px;display:block;
+}
+.section-head h2{
+  font-size:clamp(28px,4vw,44px);font-weight:800;color:var(--title);
+  letter-spacing:-1.5px;line-height:1.15;margin-bottom:16px;
+}
+.section-head p{font-size:16px;color:var(--body);max-width:540px;}
+.section-head{margin-bottom:64px;}
+.reveal{opacity:0;transform:translateY(28px);transition:all .7s cubic-bezier(.16,1,.3,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
 
-  @keyframes fadeUp{ from{ opacity:0; transform:translateY(24px); } to{ opacity:1; transform:translateY(0); } }
+/* ── About ── */
+.about{background:var(--bg-soft);}
+.about-grid{display:grid;grid-template-columns:340px 1fr;gap:80px;align-items:start;}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:48px;}}
+.profile-card{
+  background:var(--title);border-radius:24px;padding:40px 32px;
+  color:#fff;position:relative;overflow:hidden;
+}
+.profile-card::after{
+  content:'';position:absolute;bottom:-60px;right:-60px;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(168,74,20,.25);pointer-events:none;
+}
+.avatar{
+  width:80px;height:80px;border-radius:50%;
+  background:var(--point);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;font-weight:800;color:#fff;margin-bottom:20px;
+  position:relative;z-index:1;
+}
+.profile-card h3{font-size:22px;font-weight:800;margin-bottom:4px;letter-spacing:-.5px;position:relative;z-index:1;}
+.profile-card .role{font-size:13.5px;color:rgba(255,255,255,.55);margin-bottom:28px;font-weight:500;position:relative;z-index:1;}
+.profile-meta{display:flex;flex-direction:column;gap:0;position:relative;z-index:1;}
+.meta-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:13.5px;gap:12px;}
+.meta-row:last-child{border-bottom:none;}
+.meta-row .k{color:rgba(255,255,255,.4);font-weight:500;flex-shrink:0;}
+.meta-row .v{color:rgba(255,255,255,.85);font-weight:500;text-align:right;}
 
-  .scroll-indicator{
-    position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
-    color:var(--footer); font-size:11px; letter-spacing:2px;
-    display:flex; flex-direction:column; align-items:center; gap:10px;
-    animation:bounce 2.2s infinite;
-  }
-  .scroll-indicator .line{ width:1px; height:36px; background:linear-gradient(to bottom,var(--point),transparent); }
-  @keyframes bounce{ 0%,100%{ transform:translate(-50%,0); } 50%{ transform:translate(-50%,8px); } }
+.timeline{padding-left:20px;border-left:2px solid var(--bg-card);}
+.t-item{position:relative;padding-bottom:36px;padding-left:20px;}
+.t-item:last-child{padding-bottom:0;}
+.t-item::before{
+  content:'';position:absolute;left:-27px;top:6px;
+  width:10px;height:10px;border-radius:50%;
+  background:#fff;border:2.5px solid var(--point);
+}
+.t-year{font-size:12px;font-weight:700;color:var(--point);letter-spacing:1px;margin-bottom:6px;}
+.t-title{font-size:17px;font-weight:700;color:var(--title);margin-bottom:6px;letter-spacing:-.3px;}
+.t-desc{font-size:14px;color:var(--body);}
 
-  /* ── Section generic ── */
-  section{ padding:110px 6%; }
-  .section-inner{ max-width:1100px; margin:0 auto; }
-  .section-head{ margin-bottom:64px; }
-  .section-tag{
-    color:var(--point); font-size:12.5px; letter-spacing:3px; font-weight:700;
-    display:flex; align-items:center; gap:12px; margin-bottom:14px;
-  }
-  .section-tag::before{ content:''; width:28px; height:1.5px; background:var(--point); }
-  .section-head h2{ font-size:clamp(26px,4vw,36px); font-weight:800; color:var(--title); letter-spacing:-0.5px; }
-  .reveal{ opacity:0; transform:translateY(36px); transition:all 0.8s cubic-bezier(0.16,1,0.3,1); }
-  .reveal.visible{ opacity:1; transform:translateY(0); }
+/* ── Stats ── */
+.stats{background:var(--title);padding:80px 6%;}
+.stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1);}
+@media(max-width:640px){.stats-inner{grid-template-columns:1fr;}}
+.stat{background:var(--title);padding:48px 40px;text-align:left;}
+.stat-num{font-size:clamp(48px,6vw,72px);font-weight:800;color:#fff;letter-spacing:-3px;line-height:1;margin-bottom:12px;}
+.stat-num span{font-size:.45em;font-weight:700;color:rgba(255,255,255,.6);}
+.stat-label{font-size:14px;color:rgba(255,255,255,.5);line-height:1.6;}
 
-  /* ── About ── */
-  .about{ background:var(--white); }
-  .about-grid{ display:grid; grid-template-columns:320px 1fr; gap:70px; }
-  @media(max-width:820px){ .about-grid{ grid-template-columns:1fr; gap:48px; } }
+/* ── Specialties ── */
+.specialties{background:var(--bg);}
+.spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+@media(max-width:680px){.spec-grid{grid-template-columns:1fr;}}
+.spec-card{
+  background:var(--bg-soft);border-radius:20px;padding:36px 32px;
+  transition:all .3s;border:1px solid transparent;
+}
+.spec-card:hover{background:#fff;border-color:var(--border);box-shadow:var(--shadow-hover);transform:translateY(-4px);}
+.spec-icon{
+  width:44px;height:44px;border-radius:12px;background:var(--point-soft);
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+}
+.spec-icon svg{width:22px;height:22px;stroke:var(--point);}
+.spec-card h3{font-size:18px;font-weight:700;color:var(--title);margin-bottom:10px;letter-spacing:-.3px;}
+.spec-card p{font-size:14px;color:var(--body);line-height:1.7;}
 
-  .profile-card{
-    background:var(--title); border-radius:16px; padding:44px 32px;
-    text-align:center; color:var(--white); position:relative; overflow:hidden;
-    height:fit-content;
-  }
-  .profile-card::before{
-    content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px;
-    border:1px solid rgba(168,74,20,0.3); border-radius:50%;
-  }
-  .avatar-circle{
-    width:96px; height:96px; border-radius:50%;
-    background:linear-gradient(135deg,var(--point),#d4733a);
-    display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:800;
-    color:#fff; margin:0 auto 22px; position:relative; z-index:1;
-  }
-  .profile-card h3{ font-size:21px; margin-bottom:6px; position:relative; z-index:1; }
-  .profile-card .role{ color:var(--point); font-size:14px; margin-bottom:22px; position:relative; z-index:1; }
-  .profile-meta{ text-align:left; font-size:13.5px; color:rgba(255,255,255,0.72); position:relative; z-index:1; }
-  .profile-meta div{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.10); gap:12px; }
-  .profile-meta div:last-child{ border-bottom:none; }
-  .profile-meta div span:first-child{ flex-shrink:0; color:rgba(255,255,255,0.5); }
+/* ── Cases ── */
+.cases{background:var(--bg-soft);}
+.case-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;}
+.filter-btn{
+  padding:8px 18px;border-radius:100px;border:1px solid var(--border);
+  background:#fff;font-family:inherit;font-size:13.5px;font-weight:500;
+  color:var(--body);cursor:pointer;transition:all .2s;
+}
+.filter-btn.active,.filter-btn:hover{background:var(--title);color:#fff;border-color:var(--title);}
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:960px){.case-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:620px){.case-grid{grid-template-columns:1fr;}}
+.case-card{
+  background:#fff;border-radius:20px;padding:28px 24px;
+  border:1px solid var(--border);transition:all .3s;
+  display:flex;flex-direction:column;
+}
+.case-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-4px);border-color:transparent;}
+.case-tag{
+  display:inline-block;font-size:11.5px;font-weight:700;
+  color:var(--point);background:var(--point-soft);
+  padding:4px 12px;border-radius:100px;margin-bottom:14px;width:fit-content;
+  letter-spacing:.3px;
+}
+.case-card h3{font-size:15.5px;font-weight:700;color:var(--title);margin-bottom:8px;letter-spacing:-.3px;line-height:1.45;}
+.case-card p{font-size:13.5px;color:var(--body);margin-bottom:16px;flex-grow:1;line-height:1.7;}
+.case-result{font-size:12.5px;color:var(--muted);font-weight:600;border-top:1px solid var(--border);padding-top:12px;}
+.case-note{margin-top:32px;font-size:13px;color:var(--muted);text-align:center;}
 
-  .timeline{ position:relative; padding-left:28px; }
-  .timeline::before{ content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1.5px; background:linear-gradient(to bottom,var(--point),var(--bg-deep)); }
-  .t-item{ position:relative; padding-bottom:36px; }
-  .t-item:last-child{ padding-bottom:0; }
-  .t-item::before{
-    content:''; position:absolute; left:-28px; top:5px; width:11px; height:11px;
-    border-radius:50%; background:var(--white); border:2.5px solid var(--point);
-  }
-  .t-year{ color:var(--point); font-size:13px; font-weight:700; letter-spacing:1px; margin-bottom:6px; }
-  .t-title{ font-size:17px; font-weight:700; color:var(--title); margin-bottom:6px; }
-  .t-desc{ font-size:14px; color:var(--body); }
+/* ── Process ── */
+.process{background:var(--bg);}
+.process-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;}
+@media(max-width:900px){.process-grid{grid-template-columns:1fr;}}
+.process-step{padding:0 24px 0 0;position:relative;}
+@media(max-width:900px){.process-step{padding:0 0 32px 48px;border-left:2px solid var(--bg-card);}}
+.process-step:not(:last-child)::after{
+  content:'';position:absolute;top:20px;right:-8px;
+  width:16px;height:2px;background:var(--bg-card);
+}
+@media(max-width:900px){.process-step:not(:last-child)::after{display:none;}}
+.step-num{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--point-soft);color:var(--point);
+  font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;border:2px solid rgba(168,74,20,.2);
+}
+@media(max-width:900px){.step-num{position:absolute;left:-21px;top:0;}}
+.process-step h3{font-size:15px;font-weight:700;color:var(--title);margin-bottom:8px;letter-spacing:-.3px;}
+.process-step p{font-size:13px;color:var(--body);line-height:1.7;}
+.process-note{
+  margin-top:48px;background:var(--bg-soft);border-radius:16px;
+  padding:20px 28px;font-size:14px;color:var(--body);
+  border-left:3px solid var(--point);
+}
 
-  /* ── Specialties (어두운 섹션 유지) ── */
-  .specialties{ background:var(--title); position:relative; }
-  .specialties .section-head h2{ color:var(--white); }
-  .specialties .section-tag{ color:#d4733a; }
-  .specialties .section-tag::before{ background:#d4733a; }
-  .spec-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
-  @media(max-width:720px){ .spec-grid{ grid-template-columns:1fr; } }
-  .spec-card{
-    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10); border-radius:14px;
-    padding:34px 30px; transition:all 0.35s ease;
-  }
-  .spec-card:hover{ background:rgba(255,255,255,0.10); transform:translateY(-4px); border-color:rgba(168,74,20,0.5); }
-  .spec-icon{
-    width:48px; height:48px; border-radius:10px; background:rgba(168,74,20,0.18);
-    display:flex; align-items:center; justify-content:center; margin-bottom:20px;
-  }
-  .spec-icon svg{ width:24px; height:24px; stroke:#d4733a; }
-  .spec-card h3{ color:var(--white); font-size:18px; margin-bottom:10px; font-weight:700; }
-  .spec-card p{ color:rgba(255,255,255,0.58); font-size:14px; }
+/* ── FAQ ── */
+.faq{background:var(--bg-soft);}
+.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:8px;}
+.faq-item{background:#fff;border-radius:16px;border:1px solid var(--border);overflow:hidden;transition:box-shadow .3s;}
+.faq-item.open{box-shadow:var(--shadow);}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 24px;cursor:pointer;font-size:15px;font-weight:600;
+  color:var(--title);transition:color .2s;letter-spacing:-.2px;
+}
+.faq-q:hover{color:var(--point);}
+.faq-icon{font-size:18px;color:var(--muted);transition:transform .3s;flex-shrink:0;}
+.faq-item.open .faq-icon{transform:rotate(45deg);color:var(--point);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.faq-item.open .faq-a{max-height:300px;}
+.faq-a-inner{padding:0 24px 20px;font-size:14px;color:var(--body);line-height:1.75;border-top:1px solid var(--border);}
+.faq-a-inner{padding-top:16px;}
 
-  /* ── Cases ── */
-  .cases{ background:var(--bg); }
-  .case-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
-  @media(max-width:980px){ .case-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media(max-width:640px){ .case-grid{ grid-template-columns:1fr; } }
-  .case-card{
-    background:var(--white); border-radius:14px; padding:32px 28px;
-    border:1px solid var(--border); transition:all 0.35s ease; display:flex; flex-direction:column;
-  }
-  .case-card:hover{ box-shadow:0 18px 40px rgba(44,35,30,0.10); transform:translateY(-5px); border-color:var(--point); }
-  .case-tag{
-    display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:0.5px;
-    color:var(--point); background:var(--point-soft); padding:5px 12px; border-radius:20px;
-    margin-bottom:16px; width:fit-content;
-  }
-  .case-card h3{ font-size:17px; color:var(--title); margin-bottom:10px; font-weight:700; line-height:1.4; }
-  .case-card p{ font-size:13.8px; color:var(--body); margin-bottom:18px; flex-grow:1; }
-  .case-result{ font-size:13px; color:var(--point); font-weight:700; border-top:1px solid var(--border); padding-top:14px; }
-  .case-note{ margin-top:40px; font-size:13px; color:var(--footer); text-align:center; font-style:italic; }
+/* ── CTA Banner ── */
+.cta-banner{
+  background:var(--title);padding:100px 6%;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-banner::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(168,74,20,.2) 0%,transparent 70%);
+}
+.cta-banner h2{font-size:clamp(28px,5vw,52px);font-weight:800;color:#fff;margin-bottom:14px;letter-spacing:-2px;position:relative;z-index:1;}
+.cta-banner p{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:40px;position:relative;z-index:1;}
+.btn-white{background:#fff;color:var(--title);padding:16px 36px;border-radius:100px;font-size:15.5px;font-weight:700;text-decoration:none;display:inline-block;transition:all .3s;position:relative;z-index:1;font-family:inherit;}
+.btn-white:hover{background:#f0f0f0;transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.2);}
 
-  /* ── Contact ── */
-  .contact{ background:var(--bg-card); text-align:center; border-top:1px solid var(--border-dark); }
-  .contact .section-head{ text-align:center; }
-  .contact .section-tag{ justify-content:center; }
-  .contact p.sub{ color:var(--body); max-width:480px; margin:0 auto 48px; font-size:15px; }
-  .contact-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:760px; margin:0 auto; }
-  @media(max-width:700px){ .contact-grid{ grid-template-columns:1fr; } }
-  .contact-item{
-    background:var(--white); border:1px solid var(--border); border-radius:12px;
-    padding:28px 20px; transition:all 0.3s ease;
-  }
-  .contact-item:hover{ border-color:var(--point); transform:translateY(-3px); box-shadow:0 10px 24px rgba(44,35,30,0.08); }
-  .contact-item svg{ width:22px; height:22px; stroke:var(--point); margin-bottom:14px; }
-  .contact-item .label{ font-size:12px; color:var(--footer); letter-spacing:1px; margin-bottom:6px; font-weight:600; }
-  .contact-item .value{ font-size:14.5px; font-weight:700; color:var(--title); }
-
-  footer{
-    background:var(--footer); color:rgba(255,255,255,0.65);
-    text-align:center; padding:28px 6%; font-size:12.5px;
-  }
+/* ── Footer ── */
+footer{background:#0a0a0a;color:rgba(255,255,255,.4);padding:60px 6% 36px;}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+@media(max-width:720px){.footer-top{grid-template-columns:1fr;gap:32px;}}
+.footer-brand .logo{font-size:16px;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-.3px;}
+.footer-brand p{font-size:13px;line-height:1.8;color:rgba(255,255,255,.4);}
+.footer-brand .office-info{margin-top:18px;display:flex;flex-direction:column;gap:6px;}
+.footer-brand .office-info div{display:flex;gap:10px;font-size:12.5px;}
+.footer-brand .office-info span:first-child{color:rgba(255,255,255,.25);width:40px;flex-shrink:0;}
+.footer-col h4{color:rgba(255,255,255,.7);font-size:13px;font-weight:700;margin-bottom:14px;letter-spacing:.3px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.footer-col ul li a{color:rgba(255,255,255,.35);text-decoration:none;font-size:13px;transition:color .2s;}
+.footer-col ul li a:hover{color:rgba(255,255,255,.75);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;font-size:12px;color:rgba(255,255,255,.2);}
+.footer-note{font-size:12px;color:rgba(255,255,255,.25);margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.06);line-height:1.7;}
 </style>
 </head>
 <body>
-
 <div id="progress"></div>
 
+<!-- NAV -->
 <nav id="navbar">
-  <div class="nav-logo"><span class="dot"></span>공인노무사 이수진</div>
+  <a href="/" class="nav-logo">
+    <span class="badge">노무사</span>이수진
+  </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#about" onclick="closeMenu()">소개</a></li>
     <li><a href="#specialties" onclick="closeMenu()">전문분야</a></li>
     <li><a href="#cases" onclick="closeMenu()">주요사례</a></li>
-    <li><a href="#contact" onclick="closeMenu()">문의하기</a></li>
+    <li><a href="#process" onclick="closeMenu()">상담절차</a></li>
+    <li><a href="#faq" onclick="closeMenu()">FAQ</a></li>
   </ul>
-  <div class="nav-toggle" id="navToggle">☰</div>
+  <a href="contact.html" class="nav-cta">상담 신청 →</a>
+  <button class="nav-toggle" id="navToggle">☰</button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-pattern">
-    <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
-      <defs>
-        <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-          <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(44,35,30,0.07)" stroke-width="1"/>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grid)" />
-      <circle cx="850" cy="150" r="220" fill="none" stroke="rgba(168,74,20,0.10)" stroke-width="1.5"/>
-      <circle cx="850" cy="150" r="320" fill="none" stroke="rgba(168,74,20,0.06)" stroke-width="1"/>
-    </svg>
-  </div>
   <div class="hero-content">
-    <div class="hero-label">공인노무사 · LABOR ATTORNEY</div>
-    <h1>신뢰를 바탕으로,<br><span>이수진</span> 노무사입니다</h1>
-    <p class="tagline">근로자와 사업장 모두를 위한 합리적인 노동 문제 해결을 지향합니다</p>
-    <div class="hero-affil">노무법인 라움 (Raum Labor Law Firm) 소속</div>
+    <div class="hero-tag"><span class="dot"></span>공인노무사 · 노무법인 라움</div>
+    <h1>근로자와 사업장 모두를<br>위한 <em>노동 문제 해결</em></h1>
+    <p class="tagline">부당해고, 직장 내 괴롭힘, 노무 컨설팅<br>같은 기준으로 처리합니다.</p>
+    <p class="hero-sub">아무 자료가 없어도 괜찮습니다 · 상황을 적어 보내주시면 검토 후 직접 연락드립니다</p>
     <div class="hero-cta">
-      <a href="#cases" class="btn btn-primary">주요 사례 보기</a>
-      <a href="#contact" class="btn btn-outline">상담 문의하기</a>
+      <a href="contact.html" class="btn btn-primary">상담 신청하기</a>
+      <a href="#cases" class="btn btn-secondary">주요 사례 보기</a>
     </div>
   </div>
-  <div class="scroll-indicator"><div class="line"></div>SCROLL</div>
 </section>
 
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="section-inner">
     <div class="section-head reveal">
-      <div class="section-tag">ABOUT</div>
+      <span class="section-label">ABOUT</span>
       <h2>소개 및 약력</h2>
     </div>
     <div class="about-grid">
       <div class="profile-card reveal">
-        <div class="avatar-circle">이수</div>
+        <div class="avatar">이수</div>
         <h3>이수진 노무사</h3>
-        <div class="role">공인노무사 자격</div>
+        <div class="role">공인노무사 · 노무법인 라움</div>
         <div class="profile-meta">
-          <div><span>소속</span><span>노무법인 라움</span></div>
-          <div><span>전문분야</span><span>노동분쟁 · 인사컨설팅</span></div>
-          <div><span>이메일</span><span class="placeholder">example@raumlabor.com</span></div>
-          <div><span>연락처</span><span class="placeholder">010-0000-0000</span></div>
+          <div class="meta-row"><span class="k">소속</span><span class="v">노무법인 라움</span></div>
+          <div class="meta-row"><span class="k">전문분야</span><span class="v">노동분쟁 · 컨설팅</span></div>
+          <div class="meta-row"><span class="k">상담 시간</span><span class="v">평일 10 — 17시</span></div>
+          <div class="meta-row"><span class="k">상담 접수</span><span class="v">신청서로 접수</span></div>
         </div>
       </div>
       <div class="timeline reveal">
@@ -325,10 +378,10 @@
         <div class="t-item">
           <div class="t-year">2025</div>
           <div class="t-title">공인노무사 자격 취득</div>
-          <div class="t-desc">제○○회 공인노무사 시험 합격, 노동법 및 노사관계 전문 지식 습득</div>
+          <div class="t-desc">제○○회 공인노무사 시험 합격</div>
         </div>
         <div class="t-item">
-          <div class="t-year"><span class="placeholder">20○○</span></div>
+          <div class="t-year">20○○</div>
           <div class="t-title">○○대학교 ○○학과 졸업</div>
           <div class="t-desc">노동법, 인사관리 관련 전공 이수</div>
         </div>
@@ -342,12 +395,31 @@
   </div>
 </section>
 
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-inner reveal">
+    <div class="stat">
+      <div class="stat-num">6<span>건+</span></div>
+      <div class="stat-label">노동위원회·노동청<br>진행 및 지원 사건</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4<span>개소</span></div>
+      <div class="stat-label">일터혁신 컨설팅<br>수행 사업장</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2<span>년차</span></div>
+      <div class="stat-label">자격 취득 후<br>현장 실무 경력</div>
+    </div>
+  </div>
+</section>
+
 <!-- SPECIALTIES -->
 <section class="specialties" id="specialties">
   <div class="section-inner">
     <div class="section-head reveal">
-      <div class="section-tag">EXPERTISE</div>
+      <span class="section-label">EXPERTISE</span>
       <h2>전문 분야</h2>
+      <p>노동 문제의 어느 쪽이든 같은 기준으로 검토합니다</p>
     </div>
     <div class="spec-grid">
       <div class="spec-card reveal">
@@ -356,12 +428,12 @@
         <p>부당해고, 부당징계, 임금체불 등 노동위원회 구제신청 및 진정·고소 사건 대리</p>
       </div>
       <div class="spec-card reveal">
-        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5s9.3-3.1 11-7.5c-1.7-4.4-6-7.5-11-7.5z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></div>
         <h3>직장 내 괴롭힘 조사</h3>
         <p>객관적이고 공정한 사실관계 조사를 통한 직장 내 괴롭힘·성희롱 사건 처리 및 자문</p>
       </div>
       <div class="spec-card reveal">
-        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13h4l3 8 4-16 3 8h4"/></svg></div>
+        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
         <h3>일터혁신 컨설팅</h3>
         <p>임금체계 재설계, 평가체계 구축, 근무체계 개편 등 기업 노무 컨설팅 프로젝트 수행</p>
       </div>
@@ -378,100 +450,197 @@
 <section class="cases" id="cases">
   <div class="section-inner">
     <div class="section-head reveal">
-      <div class="section-tag">CASES & ACHIEVEMENTS</div>
+      <span class="section-label">CASES</span>
       <h2>주요 사례 및 성과</h2>
+      <p>의뢰인 보호를 위해 일반화·익명화하여 기재하였습니다</p>
     </div>
-    <div class="case-grid">
-      <div class="case-card reveal">
+    <div class="case-filter reveal">
+      <button class="filter-btn active" onclick="filterCase('all',this)">전체</button>
+      <button class="filter-btn" onclick="filterCase('부당해고',this)">부당해고</button>
+      <button class="filter-btn" onclick="filterCase('괴롭힘',this)">직장내괴롭힘</button>
+      <button class="filter-btn" onclick="filterCase('컨설팅',this)">컨설팅</button>
+      <button class="filter-btn" onclick="filterCase('자문',this)">자문</button>
+    </div>
+    <div class="case-grid" id="caseGrid">
+      <div class="case-card reveal" data-cat="부당해고">
         <span class="case-tag">부당해고 구제</span>
         <h3>의료기관 부당해고 구제신청 대리</h3>
         <p>계약 갱신 거절을 둘러싼 부당해고 구제신청 사건에서 갱신 기대권 침해 법리를 활용한 대응 전략 수립 및 대리</p>
         <div class="case-result">노동위원회 진행 중</div>
       </div>
-      <div class="case-card reveal">
+      <div class="case-card reveal" data-cat="괴롭힘">
         <span class="case-tag">직장 내 괴롭힘</span>
         <h3>병원 조직 내 괴롭힘 진정 사건</h3>
         <p>관리자급 피진정인을 상대로 한 직장 내 괴롭힘 진정 사건 대응, 노동청 감독관 대응 및 의견서 작성</p>
         <div class="case-result">조사 진행 지원</div>
       </div>
-      <div class="case-card reveal">
+      <div class="case-card reveal" data-cat="컨설팅">
         <span class="case-tag">일터혁신 컨설팅</span>
         <h3>제조업 임금체계 재설계 컨설팅</h3>
         <p>약 70인 규모 제조업체 대상 임금체계 재설계, 평가체계 설계, 노사파트너십 구축 컨설팅 수행</p>
         <div class="case-result">3대 개선과제 수행</div>
       </div>
-      <div class="case-card reveal">
+      <div class="case-card reveal" data-cat="컨설팅">
         <span class="case-tag">일터혁신 컨설팅</span>
         <h3>IT보안기업 근무체계 개편</h3>
-        <p>39인 규모 IT 보안 기업 대상 임금체계 재설계 및 근무체계 개편을 위한 중간 컨설팅 자료 작성</p>
+        <p>39인 규모 IT 보안 기업 대상 임금체계 재설계 및 근무체계 개편을 위한 컨설팅 자료 작성</p>
         <div class="case-result">진행 중</div>
       </div>
-      <div class="case-card reveal">
+      <div class="case-card reveal" data-cat="자문">
         <span class="case-tag">취업규칙 자문</span>
         <h3>의료기관 취업규칙 정비</h3>
         <p>고용노동부 표준 취업규칙 대비 기존 취업규칙 검토 및 법정 의무사항 반영을 위한 개정안 자문</p>
         <div class="case-result">자문 완료</div>
       </div>
-      <div class="case-card reveal">
+      <div class="case-card reveal" data-cat="자문">
         <span class="case-tag">인사노무 자문</span>
         <h3>근로조건 합의서 작성 자문</h3>
         <p>탄력적 근로시간제 도입을 위한 근로조건 합의서 작성 및 법적 리스크 검토</p>
         <div class="case-result">자문 완료</div>
       </div>
     </div>
-    <p class="case-note">※ 모든 사례는 의뢰인 보호를 위해 일반화·익명화하여 기재하였습니다</p>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
+<!-- PROCESS -->
+<section class="process" id="process">
   <div class="section-inner">
     <div class="section-head reveal">
-      <div class="section-tag">CONTACT</div>
-      <h2>상담 문의</h2>
+      <span class="section-label">PROCESS</span>
+      <h2>상담은 이렇게<br>진행됩니다</h2>
+      <p>아무 자료가 없어도 됩니다. 상황을 적어 보내주시면 검토 후 직접 연락드립니다.</p>
     </div>
-    <p class="sub reveal">노동 문제와 관련하여 궁금한 점이나 상담이 필요하시면 아래 연락처로 문의해 주세요</p>
-    <div class="contact-grid reveal">
-      <div class="contact-item">
-        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-        <div class="label">EMAIL</div>
-        <div class="value placeholder">example@raumlabor.com</div>
+    <div class="process-grid reveal">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <h3>상담 신청</h3>
+        <p>신청서에 어떤 일이 있었는지, 지금 상태만 적어주세요.</p>
       </div>
-      <div class="contact-item">
-        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 012-2h2.28a1 1 0 01.97.76l1.1 4.4a1 1 0 01-.5 1.1l-1.7.86a13 13 0 006.2 6.2l.85-1.7a1 1 0 011.1-.5l4.4 1.1a1 1 0 01.76.97V19a2 2 0 01-2 2h-1C9.16 21 3 14.84 3 7V5z"/></svg>
-        <div class="label">PHONE</div>
-        <div class="value placeholder">010-0000-0000</div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <h3>검토 후 회신</h3>
+        <p>접수 내용을 검토한 뒤 1~2일 이내에 직접 전화드립니다.</p>
       </div>
-      <div class="contact-item">
-        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.66 17.66A8 8 0 105 5a8 8 0 0012.66 12.66z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"/></svg>
-        <div class="label">OFFICE</div>
-        <div class="value">노무법인 라움</div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <h3>초기 상담</h3>
+        <p>전화·방문·온라인 중 원하시는 방식으로 진행합니다.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <h3>사건 검토</h3>
+        <p>예상 절차, 기간, 진행 여부를 안내드립니다.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">5</div>
+        <h3>수임 계약</h3>
+        <p>업무 범위와 비용을 정한 뒤 착수합니다.</p>
+      </div>
+    </div>
+    <div class="process-note reveal">
+      상담 가능 시간은 <strong>평일 10:00 ~ 17:00</strong>입니다. 기한이 임박한 사안이라면 신청서에 그 사실을 꼭 적어주세요.
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-inner">
+    <div class="section-head reveal" style="text-align:center;">
+      <span class="section-label" style="justify-content:center;display:block;">FAQ</span>
+      <h2>자주 묻는 질문</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>초보 노무사인데 믿을 수 있나요?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">노무법인 라움의 파트너 노무사(조성희 노무사, 16년 경력)와 함께 사건을 검토하고 진행합니다. 경험 부족으로 인한 리스크를 최소화하는 협력 체계 아래 처리됩니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>상담은 유료인가요?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">초기 접수 후 검토·회신은 무료입니다. 심층 상담이 필요한 경우 상담을 시작하기 전에 유·무료 여부와 금액을 먼저 안내드립니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>기업 측과 노동자 측 모두 수임하나요?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">네, 어느 쪽의 사건이든 같은 기준으로 검토합니다. 다만 이미 상대방을 자문 중인 사건은 수임하지 않습니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>부당해고 구제신청 기한이 얼마나 되나요?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">해고일로부터 <strong>3개월 이내</strong>에 신청해야 합니다. 기한이 촉박한 경우 신청서에 반드시 명시해 주세요. 우선 검토합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>지방 사건도 가능한가요?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">노동위원회 사건은 전국 대부분 지역에서 대리 가능합니다. 신청서에 지역을 함께 기재해 주세요.</div></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- CTA -->
+<section class="cta-banner" id="contact">
+  <h2 class="reveal">아무 자료가 없어도 괜찮습니다</h2>
+  <p class="reveal">상황을 적어 보내주시면 검토한 뒤 1~2일 이내에 노무사가 직접 전화로 연락드립니다</p>
+  <a href="contact.html" class="btn-white reveal">상담 신청하기 →</a>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  © 2026 이수진 공인노무사. All rights reserved. · 노무법인 라움
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">이수진 노무사 · 노무법인 라움</div>
+        <p>근로자와 사업장 모두를 위한<br>합리적인 노동 문제 해결을 지향합니다.</p>
+        <div class="office-info">
+          <div><span>소속</span><span>노무법인 라움</span></div>
+          <div><span>상담</span><span>신청서 접수 후 회신</span></div>
+          <div><span>시간</span><span>평일 10:00 ~ 17:00</span></div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>업무</h4>
+        <ul>
+          <li><a href="#specialties">노동분쟁 대응</a></li>
+          <li><a href="#specialties">직장 내 괴롭힘 조사</a></li>
+          <li><a href="#specialties">일터혁신 컨설팅</a></li>
+          <li><a href="#specialties">취업규칙·인사규정 자문</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>안내</h4>
+        <ul>
+          <li><a href="#about">노무사 소개</a></li>
+          <li><a href="#cases">주요 사례</a></li>
+          <li><a href="#process">상담 절차</a></li>
+          <li><a href="contact.html">상담 신청</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-note">본 사무소는 기업 측과 노동자 측 업무를 모두 수행합니다. 다만 이미 상대방을 자문 중인 사건은 수임하지 않습니다.</p>
+    <div class="footer-bottom">© 2026 이수진 공인노무사 · 노무법인 라움</div>
+  </div>
 </footer>
 
 <script>
-  window.addEventListener('scroll', () => {
-    const h = document.documentElement;
-    const pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
-    document.getElementById('progress').style.width = pct + '%';
-    const nav = document.getElementById('navbar');
-    if (h.scrollTop > 60) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  });
-  const toggle = document.getElementById('navToggle');
-  const links = document.getElementById('navLinks');
-  toggle.addEventListener('click', () => links.classList.toggle('open'));
-  function closeMenu(){ links.classList.remove('open'); }
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('progress').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+});
+const toggle=document.getElementById('navToggle');
+const links=document.getElementById('navLinks');
+toggle.addEventListener('click',()=>links.classList.toggle('open'));
+function closeMenu(){links.classList.remove('open');}
+const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function filterCase(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.case-card').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat===cat)?'flex':'none';});
+}
+function toggleFaq(el){
+  const item=el.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
 </script>
 </body>
 </html>
