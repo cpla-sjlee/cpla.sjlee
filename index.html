@@ -16,7 +16,6 @@
   --point:#A84A14;
   --point-hover:#8f3d10;
   --point-soft:rgba(168,74,20,0.08);
-  --dark:#111111;
   --white:#ffffff;
   --border:rgba(0,0,0,0.08);
   --shadow:0 2px 20px rgba(0,0,0,0.07);
@@ -41,16 +40,13 @@ nav{
   background:rgba(255,255,255,0.9);
   backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
-  transition:all .3s;
 }
 .nav-logo{
-  color:var(--title);font-size:15px;font-weight:700;
-  display:flex;align-items:center;gap:8px;text-decoration:none;letter-spacing:-.3px;
+  color:var(--title);font-size:16px;font-weight:700;
+  display:flex;align-items:center;gap:10px;text-decoration:none;letter-spacing:-.3px;
 }
-.nav-logo .badge{
-  background:var(--point);color:#fff;font-size:10px;font-weight:700;
-  padding:2px 7px;border-radius:20px;letter-spacing:.3px;
-}
+.nav-logo img{height:32px;width:auto;display:block;}
+.nav-logo .accent{color:var(--point);}
 .nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
 .nav-links a{
   color:var(--body);text-decoration:none;font-size:14px;font-weight:500;
@@ -80,8 +76,7 @@ nav{
   min-height:100vh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   text-align:center;padding:120px 6% 80px;
-  background:var(--bg);
-  position:relative;overflow:hidden;
+  background:var(--bg);position:relative;overflow:hidden;
 }
 .hero::before{
   content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);
@@ -101,22 +96,17 @@ nav{
 .hero h1{
   font-size:clamp(38px,6.5vw,76px);font-weight:800;
   color:var(--title);letter-spacing:-2.5px;line-height:1.1;
-  margin-bottom:24px;
-  opacity:0;animation:fadeUp .7s ease forwards .15s;
+  margin-bottom:24px;opacity:0;animation:fadeUp .7s ease forwards .15s;
 }
 .hero h1 em{color:var(--point);font-style:normal;}
 .hero p.tagline{
   font-size:clamp(16px,2vw,19px);color:var(--body);
-  margin-bottom:12px;font-weight:400;letter-spacing:-.3px;
+  margin-bottom:12px;letter-spacing:-.3px;
   opacity:0;animation:fadeUp .7s ease forwards .25s;
 }
 .hero-sub{
-  font-size:14px;color:var(--muted);margin-bottom:44px;
+  font-size:14px;color:var(--muted);
   opacity:0;animation:fadeUp .7s ease forwards .3s;
-}
-.hero-cta{
-  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
-  opacity:0;animation:fadeUp .7s ease forwards .4s;
 }
 .btn{
   padding:14px 28px;border-radius:100px;font-size:15px;font-weight:600;
@@ -140,17 +130,18 @@ section{padding:120px 6%;}
   font-size:clamp(28px,4vw,44px);font-weight:800;color:var(--title);
   letter-spacing:-1.5px;line-height:1.15;margin-bottom:16px;
 }
-.section-head p{font-size:16px;color:var(--body);max-width:540px;}
+.section-head p{font-size:16px;color:var(--body);max-width:620px;}
 .section-head{margin-bottom:64px;}
 .reveal{opacity:0;transform:translateY(28px);transition:all .7s cubic-bezier(.16,1,.3,1);}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
 /* ── About ── */
 .about{background:var(--bg-soft);}
-.about-grid{display:grid;grid-template-columns:340px 1fr;gap:80px;align-items:start;}
-@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:48px;}}
+.about-grid{display:grid;grid-template-columns:320px 1fr;gap:48px;align-items:start;}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:32px;}}
+
 .profile-card{
-  background:var(--title);border-radius:24px;padding:40px 32px;
+  background:var(--title);border-radius:24px;padding:24px 24px 28px;
   color:#fff;position:relative;overflow:hidden;
 }
 .profile-card::after{
@@ -158,46 +149,61 @@ section{padding:120px 6%;}
   width:180px;height:180px;border-radius:50%;
   background:rgba(168,74,20,.25);pointer-events:none;
 }
-.avatar{
-  width:80px;height:80px;border-radius:50%;
-  background:var(--point);
-  display:flex;align-items:center;justify-content:center;
-  font-size:24px;font-weight:800;color:#fff;margin-bottom:20px;
-  position:relative;z-index:1;
+.photo{
+  position:relative;width:100%;aspect-ratio:3/4;border-radius:16px;
+  overflow:hidden;background:#222;margin-bottom:22px;z-index:1;
 }
-.profile-card h3{font-size:22px;font-weight:800;margin-bottom:4px;letter-spacing:-.5px;position:relative;z-index:1;}
-.profile-card .role{font-size:13.5px;color:rgba(255,255,255,.55);margin-bottom:28px;font-weight:500;position:relative;z-index:1;}
-.profile-meta{display:flex;flex-direction:column;gap:0;position:relative;z-index:1;}
-.meta-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:13.5px;gap:12px;}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.photo-fallback{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:48px;font-weight:800;color:rgba(255,255,255,.25);
+}
+.profile-card h3{font-size:30px;font-weight:800;margin-bottom:2px;letter-spacing:-.5px;position:relative;z-index:1;}
+.profile-card .role{font-size:17px;color:var(--point);margin-bottom:20px;font-weight:600;position:relative;z-index:1;filter:brightness(1.5);}
+.profile-meta{position:relative;z-index:1;}
+.meta-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:13.5px;gap:12px;}
 .meta-row:last-child{border-bottom:none;}
 .meta-row .k{color:rgba(255,255,255,.4);font-weight:500;flex-shrink:0;}
-.meta-row .v{color:rgba(255,255,255,.85);font-weight:500;text-align:right;}
+.meta-row .v{color:rgba(255,255,255,.85);font-weight:500;text-align:right;word-break:break-all;}
+.meta-row a.v{text-decoration:none;}
+.meta-row a.v:hover{color:#fff;}
 
-.timeline{padding-left:20px;border-left:2px solid var(--bg-card);}
-.t-item{position:relative;padding-bottom:36px;padding-left:20px;}
-.t-item:last-child{padding-bottom:0;}
-.t-item::before{
-  content:'';position:absolute;left:-27px;top:6px;
-  width:10px;height:10px;border-radius:50%;
-  background:#fff;border:2.5px solid var(--point);
+.info-stack{display:flex;flex-direction:column;gap:16px;}
+.info-card{background:#fff;border-radius:20px;padding:28px 28px;border:1px solid var(--border);}
+.info-card h4{font-size:13px;font-weight:700;color:var(--point);letter-spacing:1.5px;margin-bottom:16px;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{
+  background:var(--bg-card);color:var(--title);font-size:13.5px;font-weight:500;
+  padding:7px 14px;border-radius:100px;
 }
-.t-year{font-size:12px;font-weight:700;color:var(--point);letter-spacing:1px;margin-bottom:6px;}
-.t-title{font-size:17px;font-weight:700;color:var(--title);margin-bottom:6px;letter-spacing:-.3px;}
-.t-desc{font-size:14px;color:var(--body);}
-
-/* ── Stats ── */
-.stats{background:var(--title);padding:80px 6%;}
-.stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1);}
-@media(max-width:640px){.stats-inner{grid-template-columns:1fr;}}
-.stat{background:var(--title);padding:48px 40px;text-align:left;}
-.stat-num{font-size:clamp(48px,6vw,72px);font-weight:800;color:#fff;letter-spacing:-3px;line-height:1;margin-bottom:12px;}
-.stat-num span{font-size:.45em;font-weight:700;color:rgba(255,255,255,.6);}
-.stat-label{font-size:14px;color:rgba(255,255,255,.5);line-height:1.6;}
+.chip.main{background:var(--title);color:#fff;}
+.career-list{list-style:none;display:flex;flex-direction:column;}
+.career-list li{
+  display:flex;align-items:flex-start;gap:14px;padding:13px 0;
+  border-bottom:1px solid var(--border);font-size:15px;color:var(--title);font-weight:500;
+}
+.career-list li:last-child{border-bottom:none;padding-bottom:0;}
+.career-list li:first-child{padding-top:0;}
+.badge{
+  flex-shrink:0;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:100px;
+  margin-top:2px;
+}
+.badge.now{background:var(--point-soft);color:var(--point);}
+.badge.past{background:var(--bg-card);color:var(--muted);}
+.badge.done{background:var(--bg-card);color:var(--body);}
+.badge.cat{background:var(--bg-card);color:var(--title);min-width:72px;text-align:center;}
+.act-note{margin-top:18px;font-size:12.5px;color:var(--muted);}
 
 /* ── Specialties ── */
 .specialties{background:var(--bg);}
-.spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
-@media(max-width:680px){.spec-grid{grid-template-columns:1fr;}}
+.spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:860px){
+  .spec-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .spec-card{padding:22px 18px;border-radius:16px;}
+  .spec-icon{width:38px;height:38px;margin-bottom:14px;}
+  .spec-card h3{font-size:15.5px;margin-bottom:8px;}
+  .spec-card p{font-size:12.5px;line-height:1.6;}
+}
 .spec-card{
   background:var(--bg-soft);border-radius:20px;padding:36px 32px;
   transition:all .3s;border:1px solid transparent;
@@ -211,78 +217,31 @@ section{padding:120px 6%;}
 .spec-card h3{font-size:18px;font-weight:700;color:var(--title);margin-bottom:10px;letter-spacing:-.3px;}
 .spec-card p{font-size:14px;color:var(--body);line-height:1.7;}
 
-/* ── Cases ── */
-.cases{background:var(--bg-soft);}
-.case-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;}
-.filter-btn{
-  padding:8px 18px;border-radius:100px;border:1px solid var(--border);
-  background:#fff;font-family:inherit;font-size:13.5px;font-weight:500;
-  color:var(--body);cursor:pointer;transition:all .2s;
-}
-.filter-btn.active,.filter-btn:hover{background:var(--title);color:#fff;border-color:var(--title);}
-.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-@media(max-width:960px){.case-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:620px){.case-grid{grid-template-columns:1fr;}}
-.case-card{
-  background:#fff;border-radius:20px;padding:28px 24px;
-  border:1px solid var(--border);transition:all .3s;
-  display:flex;flex-direction:column;
-}
-.case-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-4px);border-color:transparent;}
-.case-tag{
-  display:inline-block;font-size:11.5px;font-weight:700;
-  color:var(--point);background:var(--point-soft);
-  padding:4px 12px;border-radius:100px;margin-bottom:14px;width:fit-content;
-  letter-spacing:.3px;
-}
-.case-card h3{font-size:15.5px;font-weight:700;color:var(--title);margin-bottom:8px;letter-spacing:-.3px;line-height:1.45;}
-.case-card p{font-size:13.5px;color:var(--body);margin-bottom:16px;flex-grow:1;line-height:1.7;}
-.case-result{font-size:12.5px;color:var(--muted);font-weight:600;border-top:1px solid var(--border);padding-top:12px;}
-.case-note{margin-top:32px;font-size:13px;color:var(--muted);text-align:center;}
-
 /* ── Process ── */
-.process{background:var(--bg);}
+.process{background:var(--bg-soft);}
 .process-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;}
 @media(max-width:900px){.process-grid{grid-template-columns:1fr;}}
 .process-step{padding:0 24px 0 0;position:relative;}
 @media(max-width:900px){.process-step{padding:0 0 32px 48px;border-left:2px solid var(--bg-card);}}
 .process-step:not(:last-child)::after{
   content:'';position:absolute;top:20px;right:-8px;
-  width:16px;height:2px;background:var(--bg-card);
+  width:16px;height:2px;background:#e5e5e5;
 }
 @media(max-width:900px){.process-step:not(:last-child)::after{display:none;}}
 .step-num{
   width:40px;height:40px;border-radius:50%;
   background:var(--point-soft);color:var(--point);
   font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;
-  margin-bottom:16px;border:2px solid rgba(168,74,20,.2);
+  margin-bottom:16px;border:2px solid rgba(168,74,20,.2);background-color:#fff;
 }
 @media(max-width:900px){.step-num{position:absolute;left:-21px;top:0;}}
 .process-step h3{font-size:15px;font-weight:700;color:var(--title);margin-bottom:8px;letter-spacing:-.3px;}
 .process-step p{font-size:13px;color:var(--body);line-height:1.7;}
 .process-note{
-  margin-top:48px;background:var(--bg-soft);border-radius:16px;
-  padding:20px 28px;font-size:14px;color:var(--body);
+  margin-top:48px;background:#fff;border-radius:16px;
+  padding:20px 28px;font-size:14px;color:var(--point);
   border-left:3px solid var(--point);
 }
-
-/* ── FAQ ── */
-.faq{background:var(--bg-soft);}
-.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:8px;}
-.faq-item{background:#fff;border-radius:16px;border:1px solid var(--border);overflow:hidden;transition:box-shadow .3s;}
-.faq-item.open{box-shadow:var(--shadow);}
-.faq-q{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:20px 24px;cursor:pointer;font-size:15px;font-weight:600;
-  color:var(--title);transition:color .2s;letter-spacing:-.2px;
-}
-.faq-q:hover{color:var(--point);}
-.faq-icon{font-size:18px;color:var(--muted);transition:transform .3s;flex-shrink:0;}
-.faq-item.open .faq-icon{transform:rotate(45deg);color:var(--point);}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
-.faq-item.open .faq-a{max-height:300px;}
-.faq-a-inner{padding:0 24px 20px;font-size:14px;color:var(--body);line-height:1.75;border-top:1px solid var(--border);}
-.faq-a-inner{padding-top:16px;}
 
 /* ── CTA Banner ── */
 .cta-banner{
@@ -294,27 +253,28 @@ section{padding:120px 6%;}
   width:600px;height:600px;border-radius:50%;
   background:radial-gradient(circle,rgba(168,74,20,.2) 0%,transparent 70%);
 }
-.cta-banner h2{font-size:clamp(28px,5vw,52px);font-weight:800;color:#fff;margin-bottom:14px;letter-spacing:-2px;position:relative;z-index:1;}
+.cta-banner h2{font-size:clamp(28px,5vw,52px);font-weight:800;color:#fff;margin-bottom:40px;letter-spacing:-2px;line-height:1.25;position:relative;z-index:1;}
 .cta-banner p{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:40px;position:relative;z-index:1;}
 .btn-white{background:#fff;color:var(--title);padding:16px 36px;border-radius:100px;font-size:15.5px;font-weight:700;text-decoration:none;display:inline-block;transition:all .3s;position:relative;z-index:1;font-family:inherit;}
 .btn-white:hover{background:#f0f0f0;transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.2);}
 
 /* ── Footer ── */
-footer{background:#0a0a0a;color:rgba(255,255,255,.4);padding:60px 6% 36px;}
+footer{background:#0a0a0a;color:rgba(255,255,255,.55);padding:60px 6% 36px;}
 .footer-inner{max-width:1100px;margin:0 auto;}
 .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;margin-bottom:48px;}
 @media(max-width:720px){.footer-top{grid-template-columns:1fr;gap:32px;}}
 .footer-brand .logo{font-size:16px;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-.3px;}
-.footer-brand p{font-size:13px;line-height:1.8;color:rgba(255,255,255,.4);}
+.footer-brand .logo .accent{color:#d4733a;}
+.footer-brand p{font-size:13px;line-height:1.8;color:rgba(255,255,255,.6);}
 .footer-brand .office-info{margin-top:18px;display:flex;flex-direction:column;gap:6px;}
-.footer-brand .office-info div{display:flex;gap:10px;font-size:12.5px;}
-.footer-brand .office-info span:first-child{color:rgba(255,255,255,.25);width:40px;flex-shrink:0;}
-.footer-col h4{color:rgba(255,255,255,.7);font-size:13px;font-weight:700;margin-bottom:14px;letter-spacing:.3px;}
+.footer-brand .office-info div{display:flex;gap:10px;font-size:12.5px;color:rgba(255,255,255,.7);}
+.footer-brand .office-info span:first-child{color:rgba(255,255,255,.45);width:40px;flex-shrink:0;}
+.footer-col h4{color:rgba(255,255,255,.88);font-size:13px;font-weight:700;margin-bottom:14px;letter-spacing:.3px;}
 .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
-.footer-col ul li a{color:rgba(255,255,255,.35);text-decoration:none;font-size:13px;transition:color .2s;}
-.footer-col ul li a:hover{color:rgba(255,255,255,.75);}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;font-size:12px;color:rgba(255,255,255,.2);}
-.footer-note{font-size:12px;color:rgba(255,255,255,.25);margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.06);line-height:1.7;}
+.footer-col ul li a{color:rgba(255,255,255,.58);text-decoration:none;font-size:13px;transition:color .2s;}
+.footer-col ul li a:hover{color:#fff;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;font-size:12px;color:rgba(255,255,255,.4);}
+.footer-note{font-size:12px;color:rgba(255,255,255,.48);margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.06);line-height:1.7;}
 </style>
 </head>
 <body>
@@ -322,31 +282,26 @@ footer{background:#0a0a0a;color:rgba(255,255,255,.4);padding:60px 6% 36px;}
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="/" class="nav-logo">
-    <span class="badge">노무사</span>이수진
+  <a href="#" class="nav-logo">
+    <img src="logo.png" alt="" onerror="this.remove()">
+    <span><span class="accent">야무진</span> 이수진 노무사</span>
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#about" onclick="closeMenu()">소개</a></li>
     <li><a href="#specialties" onclick="closeMenu()">전문분야</a></li>
-    <li><a href="#cases" onclick="closeMenu()">주요사례</a></li>
     <li><a href="#process" onclick="closeMenu()">상담절차</a></li>
-    <li><a href="#faq" onclick="closeMenu()">FAQ</a></li>
   </ul>
   <a href="contact.html" class="nav-cta">상담 신청 →</a>
-  <button class="nav-toggle" id="navToggle">☰</button>
+  <button class="nav-toggle" id="navToggle" aria-label="메뉴">☰</button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-tag"><span class="dot"></span>공인노무사 · 노무법인 라움</div>
-    <h1>근로자와 사업장 모두를<br>위한 <em>노동 문제 해결</em></h1>
-    <p class="tagline">부당해고, 직장 내 괴롭힘, 노무 컨설팅<br>같은 기준으로 처리합니다.</p>
-    <p class="hero-sub">아무 자료가 없어도 괜찮습니다 · 상황을 적어 보내주시면 검토 후 직접 연락드립니다</p>
-    <div class="hero-cta">
-      <a href="contact.html" class="btn btn-primary">상담 신청하기</a>
-      <a href="#cases" class="btn btn-secondary">주요 사례 보기</a>
-    </div>
+    <div class="hero-tag"><span class="dot"></span>공인노무사</div>
+    <h1>내 편에서 가장 든든하고<br>야무진 <em>노무 해결 파트너</em></h1>
+    <p class="tagline">부당해고, 임금체불, 인사노무 컨설팅까지 빈틈없이 해결합니다.</p>
+    <p class="hero-sub">어디서부터 시작해야 할 지 몰라도 괜찮습니다. 편하게 현재 상황을 들려주세요!</p>
   </div>
 </section>
 
@@ -355,60 +310,58 @@ footer{background:#0a0a0a;color:rgba(255,255,255,.4);padding:60px 6% 36px;}
   <div class="section-inner">
     <div class="section-head reveal">
       <span class="section-label">ABOUT</span>
-      <h2>소개 및 약력</h2>
+      <h2>소개 및 이력</h2>
     </div>
-    <div class="about-grid">
-      <div class="profile-card reveal">
-        <div class="avatar">이수</div>
-        <h3>이수진 노무사</h3>
-        <div class="role">공인노무사 · 노무법인 라움</div>
-        <div class="profile-meta">
-          <div class="meta-row"><span class="k">소속</span><span class="v">노무법인 라움</span></div>
-          <div class="meta-row"><span class="k">전문분야</span><span class="v">노동분쟁 · 컨설팅</span></div>
-          <div class="meta-row"><span class="k">상담 시간</span><span class="v">평일 10 — 17시</span></div>
-          <div class="meta-row"><span class="k">상담 접수</span><span class="v">신청서로 접수</span></div>
-        </div>
-      </div>
-      <div class="timeline reveal">
-        <div class="t-item">
-          <div class="t-year">2026</div>
-          <div class="t-title">노무법인 라움 입사</div>
-          <div class="t-desc">노동분쟁 대응, 직장 내 괴롭힘 조사, 부당해고 구제 신청 등 노무 자문 및 사건 수행</div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">2025</div>
-          <div class="t-title">공인노무사 자격 취득</div>
-          <div class="t-desc">제○○회 공인노무사 시험 합격</div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">20○○</div>
-          <div class="t-title">○○대학교 ○○학과 졸업</div>
-          <div class="t-desc">노동법, 인사관리 관련 전공 이수</div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">진행중</div>
-          <div class="t-title">일터혁신 상생컨설팅 수행</div>
-          <div class="t-desc">중소기업 대상 임금체계 재설계, 평가체계 구축, 근무체계 개편 등 컨설팅 프로젝트 참여</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- STATS -->
-<section class="stats">
-  <div class="stats-inner reveal">
-    <div class="stat">
-      <div class="stat-num">6<span>건+</span></div>
-      <div class="stat-label">노동위원회·노동청<br>진행 및 지원 사건</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">4<span>개소</span></div>
-      <div class="stat-label">일터혁신 컨설팅<br>수행 사업장</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">2<span>년차</span></div>
-      <div class="stat-label">자격 취득 후<br>현장 실무 경력</div>
+    <div class="about-grid">
+      <!-- 프로필 카드 -->
+      <div class="profile-card reveal">
+        <div class="photo">
+          <span class="photo-fallback">이수진</span>
+          <img src="profile.jpg" alt="이수진 노무사" onerror="this.remove()">
+        </div>
+        <h3>이수진</h3>
+        <div class="role">공인노무사</div>
+        <div class="profile-meta">
+          <div class="meta-row"><span class="k">학력</span><span class="v">연세대학교 졸업</span></div>
+          <div class="meta-row"><span class="k">이메일</span><a class="v" href="mailto:cpla_sjlee@naver.com">cpla_sjlee@naver.com</a></div>
+        </div>
+      </div>
+
+      <!-- 자격 + 경력 -->
+      <div class="info-stack">
+        <div class="info-card reveal">
+          <h4>자격</h4>
+          <div class="chips">
+            <span class="chip main">공인노무사</span>
+            <span class="chip">한국공인노무사회 HRM전문가</span>
+            <span class="chip">한국공인노무사회 사회보험전문가</span>
+          </div>
+        </div>
+        <div class="info-card reveal">
+          <h4>경력</h4>
+          <ul class="career-list">
+            <li><span class="badge now">현</span>노무법인 라움 노무사</li>
+            <li><span class="badge now">현</span>한국능률협회컨설팅 일터혁신 상생컨설팅 컨설턴트</li>
+            <li><span class="badge now">현</span>여성노동법률지원센터 직장 내 성희롱 전문가 양성과정 수료</li>
+            <li><span class="badge past">전</span>대기업 및 중견기업 HR</li>
+          </ul>
+        </div>
+        <div class="info-card reveal">
+          <h4>주요 업무 수행</h4>
+          <ul class="career-list">
+            <li><span class="badge cat">노동사건</span>K의료원, B병원 부당해고 구제신청 등 노동위원회 사건 다수 수행</li>
+            <li><span class="badge cat">노동사건</span>T골프장 근로자성 진정, E유치원 임금체불 등 노동청 사건 다수 수행</li>
+            <li><span class="badge cat">조사</span>직장 내 괴롭힘 및 성희롱 외부 조사 용역</li>
+            <li><span class="badge cat">조사</span>S병원, D병원 등 근로감독 다수 대응 및 모의 근로감독 컨설팅 수행</li>
+            <li><span class="badge cat">강의</span>C공공기관 직장 내 성희롱 행위자 재발방지교육, C영화관 개인정보보호 및 장애인 인식개선 교육 등 다수 진행</li>
+            <li><span class="badge cat">컨설팅</span>공공기관 직무중심 인사관리 고도화 컨설팅</li>
+            <li><span class="badge cat">컨설팅</span>G사(제조업), S사(IT), W사(F&amp;B) 임금체계·평가제도·직무분석·근무체계·노사 파트너십 컨설팅</li>
+            <li><span class="badge cat">자문</span>공공기관, 병의원, 제조업, IT, 프랜차이즈, 엔터테인먼트, 스타트업 등 다수 법률자문 및 급여아웃소싱</li>
+          </ul>
+          <p class="act-note">※ 의뢰인 보호를 위해 기관·회사명은 이니셜로 표기하였습니다.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -423,80 +376,34 @@ footer{background:#0a0a0a;color:rgba(255,255,255,.4);padding:60px 6% 36px;}
     </div>
     <div class="spec-grid">
       <div class="spec-card reveal">
-        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 3"/></svg></div>
+        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7h14M5 7l-3 7a4 4 0 006 0L5 7zM19 7l-3 7a4 4 0 006 0l-3-7zM8 21h8"/></svg></div>
         <h3>노동분쟁 대응</h3>
-        <p>부당해고, 부당징계, 임금체불 등 노동위원회 구제신청 및 진정·고소 사건 대리</p>
+        <p>부당해고, 임금체불, 근로기준법 위반 등 노동위원회 구제신청 및 노동청 진정·고소 사건 대리</p>
       </div>
       <div class="spec-card reveal">
-        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></div>
-        <h3>직장 내 괴롭힘 조사</h3>
+        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>직장 내 괴롭힘·성희롱 조사</h3>
         <p>객관적이고 공정한 사실관계 조사를 통한 직장 내 괴롭힘·성희롱 사건 처리 및 자문</p>
       </div>
       <div class="spec-card reveal">
-        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
-        <h3>일터혁신 컨설팅</h3>
-        <p>임금체계 재설계, 평가체계 구축, 근무체계 개편 등 기업 노무 컨설팅 프로젝트 수행</p>
+        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+        <h3>컨설팅</h3>
+        <p>임금/평가체계 구축, 근무체계 개편, 노사관계, 모의 근로감독, 정리해고 등 기업 노무 컨설팅 프로젝트</p>
       </div>
       <div class="spec-card reveal">
-        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg></div>
-        <h3>취업규칙·인사규정 자문</h3>
-        <p>취업규칙 정비, 근로계약서·합의서 작성, 인사노무 관련 각종 문서 검토 및 자문</p>
+        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4M7 9h6M7 12h4"/></svg></div>
+        <h3>교육</h3>
+        <p>직장 내 괴롭힘 및 성희롱 예방, 장애인 인식개선, 개인정보보호 등 법정 의무교육, HR담당자 역량향상 교육, 신입사원 교육</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- CASES -->
-<section class="cases" id="cases">
-  <div class="section-inner">
-    <div class="section-head reveal">
-      <span class="section-label">CASES</span>
-      <h2>주요 사례 및 성과</h2>
-      <p>의뢰인 보호를 위해 일반화·익명화하여 기재하였습니다</p>
-    </div>
-    <div class="case-filter reveal">
-      <button class="filter-btn active" onclick="filterCase('all',this)">전체</button>
-      <button class="filter-btn" onclick="filterCase('부당해고',this)">부당해고</button>
-      <button class="filter-btn" onclick="filterCase('괴롭힘',this)">직장내괴롭힘</button>
-      <button class="filter-btn" onclick="filterCase('컨설팅',this)">컨설팅</button>
-      <button class="filter-btn" onclick="filterCase('자문',this)">자문</button>
-    </div>
-    <div class="case-grid" id="caseGrid">
-      <div class="case-card reveal" data-cat="부당해고">
-        <span class="case-tag">부당해고 구제</span>
-        <h3>의료기관 부당해고 구제신청 대리</h3>
-        <p>계약 갱신 거절을 둘러싼 부당해고 구제신청 사건에서 갱신 기대권 침해 법리를 활용한 대응 전략 수립 및 대리</p>
-        <div class="case-result">노동위원회 진행 중</div>
+      <div class="spec-card reveal">
+        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 00-1 1v16a1 1 0 001 1h12a1 1 0 001-1V8l-5-5z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></div>
+        <h3>인사 제규정 자문</h3>
+        <p>근로감독 대비, 취업규칙 정비, 근로계약서·합의서 작성, 인사노무 관련 각종 문서 검토 및 자문</p>
       </div>
-      <div class="case-card reveal" data-cat="괴롭힘">
-        <span class="case-tag">직장 내 괴롭힘</span>
-        <h3>병원 조직 내 괴롭힘 진정 사건</h3>
-        <p>관리자급 피진정인을 상대로 한 직장 내 괴롭힘 진정 사건 대응, 노동청 감독관 대응 및 의견서 작성</p>
-        <div class="case-result">조사 진행 지원</div>
-      </div>
-      <div class="case-card reveal" data-cat="컨설팅">
-        <span class="case-tag">일터혁신 컨설팅</span>
-        <h3>제조업 임금체계 재설계 컨설팅</h3>
-        <p>약 70인 규모 제조업체 대상 임금체계 재설계, 평가체계 설계, 노사파트너십 구축 컨설팅 수행</p>
-        <div class="case-result">3대 개선과제 수행</div>
-      </div>
-      <div class="case-card reveal" data-cat="컨설팅">
-        <span class="case-tag">일터혁신 컨설팅</span>
-        <h3>IT보안기업 근무체계 개편</h3>
-        <p>39인 규모 IT 보안 기업 대상 임금체계 재설계 및 근무체계 개편을 위한 컨설팅 자료 작성</p>
-        <div class="case-result">진행 중</div>
-      </div>
-      <div class="case-card reveal" data-cat="자문">
-        <span class="case-tag">취업규칙 자문</span>
-        <h3>의료기관 취업규칙 정비</h3>
-        <p>고용노동부 표준 취업규칙 대비 기존 취업규칙 검토 및 법정 의무사항 반영을 위한 개정안 자문</p>
-        <div class="case-result">자문 완료</div>
-      </div>
-      <div class="case-card reveal" data-cat="자문">
-        <span class="case-tag">인사노무 자문</span>
-        <h3>근로조건 합의서 작성 자문</h3>
-        <p>탄력적 근로시간제 도입을 위한 근로조건 합의서 작성 및 법적 리스크 검토</p>
-        <div class="case-result">자문 완료</div>
+      <div class="spec-card reveal">
+        <div class="spec-icon"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5c-.5-1-1.5-1.5-2.5-1.5-1.4 0-2.5.8-2.5 2s1.1 1.7 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1 0-2-.5-2.5-1.5M12 6.5V8M12 16v1.5"/></svg></div>
+        <h3>고용지원금</h3>
+        <p>청년일자리도약장려금, 육아휴직 지원금, 대체인력지원금 등 지원금 신청 대행</p>
       </div>
     </div>
   </div>
@@ -508,13 +415,13 @@ footer{background:#0a0a0a;color:rgba(255,255,255,.4);padding:60px 6% 36px;}
     <div class="section-head reveal">
       <span class="section-label">PROCESS</span>
       <h2>상담은 이렇게<br>진행됩니다</h2>
-      <p>아무 자료가 없어도 됩니다. 상황을 적어 보내주시면 검토 후 직접 연락드립니다.</p>
+      <p>상황을 적어 보내주시면 검토 후 직접 연락드립니다.<br>관련 자료를 첨부해주시면 더욱 야무진 상담이 가능합니다.</p>
     </div>
     <div class="process-grid reveal">
       <div class="process-step">
         <div class="step-num">1</div>
         <h3>상담 신청</h3>
-        <p>신청서에 어떤 일이 있었는지, 지금 상태만 적어주세요.</p>
+        <p>신청서에 어떤 일이 있었는지, 지금 상태를 있는 그대로 적어주세요.</p>
       </div>
       <div class="process-step">
         <div class="step-num">2</div>
@@ -538,47 +445,15 @@ footer{background:#0a0a0a;color:rgba(255,255,255,.4);padding:60px 6% 36px;}
       </div>
     </div>
     <div class="process-note reveal">
-      상담 가능 시간은 <strong>평일 10:00 ~ 17:00</strong>입니다. 기한이 임박한 사안이라면 신청서에 그 사실을 꼭 적어주세요.
+      <strong>기한이 임박한 사안이라면 신청서에 그 사실을 꼭 적어주세요.</strong>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="faq" id="faq">
-  <div class="section-inner">
-    <div class="section-head reveal" style="text-align:center;">
-      <span class="section-label" style="justify-content:center;display:block;">FAQ</span>
-      <h2>자주 묻는 질문</h2>
-    </div>
-    <div class="faq-list reveal">
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)"><span>초보 노무사인데 믿을 수 있나요?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">노무법인 라움의 파트너 노무사(조성희 노무사, 16년 경력)와 함께 사건을 검토하고 진행합니다. 경험 부족으로 인한 리스크를 최소화하는 협력 체계 아래 처리됩니다.</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)"><span>상담은 유료인가요?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">초기 접수 후 검토·회신은 무료입니다. 심층 상담이 필요한 경우 상담을 시작하기 전에 유·무료 여부와 금액을 먼저 안내드립니다.</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)"><span>기업 측과 노동자 측 모두 수임하나요?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">네, 어느 쪽의 사건이든 같은 기준으로 검토합니다. 다만 이미 상대방을 자문 중인 사건은 수임하지 않습니다.</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)"><span>부당해고 구제신청 기한이 얼마나 되나요?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">해고일로부터 <strong>3개월 이내</strong>에 신청해야 합니다. 기한이 촉박한 경우 신청서에 반드시 명시해 주세요. 우선 검토합니다.</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)"><span>지방 사건도 가능한가요?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">노동위원회 사건은 전국 대부분 지역에서 대리 가능합니다. 신청서에 지역을 함께 기재해 주세요.</div></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- CTA -->
 <section class="cta-banner" id="contact">
-  <h2 class="reveal">아무 자료가 없어도 괜찮습니다</h2>
-  <p class="reveal">상황을 적어 보내주시면 검토한 뒤 1~2일 이내에 노무사가 직접 전화로 연락드립니다</p>
+  <h2 class="reveal">사건은 꼼꼼하게,<br>권리는 야무지게 챙겨드리겠습니다</h2>
   <a href="contact.html" class="btn-white reveal">상담 신청하기 →</a>
 </section>
 
@@ -587,35 +462,35 @@ footer{background:#0a0a0a;color:rgba(255,255,255,.4);padding:60px 6% 36px;}
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="logo">이수진 노무사 · 노무법인 라움</div>
+        <div class="logo"><span class="accent">야무진</span> 이수진 노무사</div>
         <p>근로자와 사업장 모두를 위한<br>합리적인 노동 문제 해결을 지향합니다.</p>
         <div class="office-info">
           <div><span>소속</span><span>노무법인 라움</span></div>
           <div><span>상담</span><span>신청서 접수 후 회신</span></div>
-          <div><span>시간</span><span>평일 10:00 ~ 17:00</span></div>
         </div>
       </div>
       <div class="footer-col">
         <h4>업무</h4>
         <ul>
           <li><a href="#specialties">노동분쟁 대응</a></li>
-          <li><a href="#specialties">직장 내 괴롭힘 조사</a></li>
-          <li><a href="#specialties">일터혁신 컨설팅</a></li>
-          <li><a href="#specialties">취업규칙·인사규정 자문</a></li>
+          <li><a href="#specialties">괴롭힘·성희롱 조사</a></li>
+          <li><a href="#specialties">컨설팅</a></li>
+          <li><a href="#specialties">교육</a></li>
+          <li><a href="#specialties">인사 제규정 자문</a></li>
+          <li><a href="#specialties">고용지원금</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>안내</h4>
         <ul>
           <li><a href="#about">노무사 소개</a></li>
-          <li><a href="#cases">주요 사례</a></li>
           <li><a href="#process">상담 절차</a></li>
           <li><a href="contact.html">상담 신청</a></li>
         </ul>
       </div>
     </div>
-    <p class="footer-note">본 사무소는 기업 측과 노동자 측 업무를 모두 수행합니다. 다만 이미 상대방을 자문 중인 사건은 수임하지 않습니다.</p>
-    <div class="footer-bottom">© 2026 이수진 공인노무사 · 노무법인 라움</div>
+    <p class="footer-note">기업 측과 노동자 측 업무를 모두 수행합니다. 다만 이미 상대방을 자문 중인 사건은 수임하지 않습니다.</p>
+    <div class="footer-bottom">© 2026 이수진 공인노무사</div>
   </div>
 </footer>
 
@@ -630,17 +505,6 @@ toggle.addEventListener('click',()=>links.classList.toggle('open'));
 function closeMenu(){links.classList.remove('open');}
 const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-function filterCase(cat,btn){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.case-card').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat===cat)?'flex':'none';});
-}
-function toggleFaq(el){
-  const item=el.parentElement;
-  const isOpen=item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-  if(!isOpen)item.classList.add('open');
-}
 </script>
 </body>
 </html>
