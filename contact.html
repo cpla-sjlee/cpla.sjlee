@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>상담 신청 | 야무진 이수진 노무사</title>
+<link href="https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;
+  --bg-soft:#f8f8f8;
+  --bg-card:#f3f3f3;
+  --title:#111111;
+  --body:#555555;
+  --muted:#999999;
+  --point:#A84A14;
+  --point-hover:#8f3d10;
+  --point-soft:rgba(168,74,20,0.08);
+  --border:rgba(0,0,0,0.08);
+  --border-strong:rgba(0,0,0,0.16);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"42dot Sans","Pretendard","Apple SD Gothic Neo",sans-serif;
+  background:var(--bg-soft);color:var(--body);line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── Nav ── */
+nav{
+  position:sticky;top:0;z-index:900;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 6%;height:64px;
+  background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  color:var(--title);font-size:16px;font-weight:700;
+  display:flex;align-items:center;gap:10px;text-decoration:none;letter-spacing:-.3px;
+}
+.nav-logo img{height:32px;width:auto;display:block;}
+.nav-logo .accent{color:var(--point);}
+.nav-back{
+  font-size:14px;font-weight:500;color:var(--body);text-decoration:none;
+  padding:8px 16px;border-radius:100px;border:1px solid var(--border);background:#fff;
+  transition:all .2s;
+}
+.nav-back:hover{color:var(--title);border-color:var(--border-strong);}
+
+/* ── Header ── */
+.page-head{background:#fff;border-bottom:1px solid var(--border);padding:64px 6% 48px;}
+.page-head-inner{max-width:1100px;margin:0 auto;}
+.crumb{font-size:13px;color:var(--muted);margin-bottom:20px;}
+.crumb a{color:var(--muted);text-decoration:none;}
+.crumb a:hover{color:var(--point);}
+.page-head h1{
+  font-size:clamp(32px,5vw,52px);font-weight:800;color:var(--title);
+  letter-spacing:-2px;line-height:1.15;margin-bottom:16px;
+}
+.page-head h1 em{color:var(--point);font-style:normal;}
+.page-head p{font-size:16px;color:var(--body);max-width:640px;}
+.page-head p strong{color:var(--title);}
+
+/* ── Layout ── */
+main{max-width:1100px;margin:0 auto;padding:56px 6% 96px;}
+.layout{display:grid;grid-template-columns:340px 1fr;gap:32px;align-items:start;}
+@media(max-width:900px){.layout{grid-template-columns:1fr;}}
+
+/* ── Side ── */
+.side{display:flex;flex-direction:column;gap:16px;}
+@media(min-width:901px){.side{position:sticky;top:88px;}}
+.side-card{background:#fff;border-radius:20px;border:1px solid var(--border);padding:26px 24px;}
+.side-card h4{font-size:13px;font-weight:700;color:var(--point);letter-spacing:1.5px;margin-bottom:16px;}
+.steps{list-style:none;display:flex;flex-direction:column;}
+.steps li{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);}
+.steps li:first-child{padding-top:0;}
+.steps li:last-child{border-bottom:none;padding-bottom:0;}
+.step-n{
+  width:24px;height:24px;border-radius:50%;flex-shrink:0;margin-top:1px;
+  border:1.5px solid rgba(168,74,20,.3);color:var(--point);
+  font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center;
+}
+.steps strong{display:block;font-size:14.5px;color:var(--title);font-weight:700;}
+.steps span{font-size:13px;color:var(--body);}
+.notes{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.notes li{position:relative;padding-left:14px;font-size:13.5px;color:var(--body);line-height:1.65;}
+.notes li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--point);}
+.notes strong{color:var(--title);}
+.notes .warn{color:var(--point);font-weight:700;}
+
+/* ── Form ── */
+.form-card{background:#fff;border-radius:24px;border:1px solid var(--border);padding:40px 36px;}
+@media(max-width:560px){.form-card{padding:28px 20px;border-radius:20px;}}
+.form-card > h2{font-size:22px;font-weight:800;color:var(--title);letter-spacing:-.5px;margin-bottom:6px;}
+.form-card > .lead{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:560px){.row{grid-template-columns:1fr;}}
+.field{margin-bottom:22px;}
+.field label{display:block;font-size:14px;font-weight:700;color:var(--title);margin-bottom:6px;}
+.field label .req{color:var(--point);}
+.field .hint{font-size:12.5px;color:var(--muted);margin-bottom:8px;line-height:1.6;}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px 16px;border:1px solid var(--border-strong);border-radius:12px;
+  font-size:15px;font-family:inherit;color:var(--title);background:var(--bg-soft);
+  outline:none;transition:border-color .2s,background .2s,box-shadow .2s;
+  -webkit-appearance:none;appearance:none;
+}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;cursor:pointer;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--point);background:#fff;box-shadow:0 0 0 3px var(--point-soft);
+}
+.field textarea{resize:vertical;min-height:170px;line-height:1.7;}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.seg-opt{position:relative;cursor:pointer;}
+.seg-opt input{position:absolute;opacity:0;pointer-events:none;}
+.seg-opt span{
+  display:block;text-align:center;padding:13px 16px;border:1px solid var(--border-strong);border-radius:12px;
+  font-size:15px;font-weight:600;color:var(--body);background:var(--bg-soft);transition:all .2s;
+}
+.seg-opt:hover span{border-color:var(--title);}
+.seg-opt input:checked + span{background:var(--title);border-color:var(--title);color:#fff;}
+.seg-opt input:focus-visible + span{box-shadow:0 0 0 3px var(--point-soft);}
+.divider{border:none;border-top:1px solid var(--border);margin:8px 0 28px;}
+
+.attach{
+  display:flex;gap:12px;align-items:flex-start;
+  background:var(--point-soft);border-radius:14px;padding:16px 18px;margin-bottom:24px;
+}
+.attach svg{width:20px;height:20px;stroke:var(--point);flex-shrink:0;margin-top:2px;}
+.attach p{font-size:13.5px;color:var(--title);line-height:1.65;}
+.attach a{color:var(--point);font-weight:700;text-decoration:none;}
+
+.privacy{background:var(--bg-soft);border-radius:14px;padding:20px 22px;margin-bottom:18px;font-size:13px;color:var(--body);}
+.privacy h5{font-size:13.5px;font-weight:700;color:var(--title);margin-bottom:12px;}
+.privacy table{width:100%;border-collapse:collapse;}
+.privacy td{padding:7px 0;vertical-align:top;border-bottom:1px solid var(--border);line-height:1.6;}
+.privacy tr:last-child td{border-bottom:none;}
+.privacy td:first-child{width:76px;color:var(--muted);font-weight:600;}
+.privacy .fine{margin-top:12px;font-size:12.5px;color:var(--muted);line-height:1.65;}
+
+.check{display:flex;gap:10px;align-items:flex-start;margin-bottom:26px;cursor:pointer;}
+.check input{width:18px;height:18px;margin-top:2px;accent-color:var(--point);flex-shrink:0;cursor:pointer;}
+.check span{font-size:14px;font-weight:600;color:var(--title);}
+.check .req{color:var(--point);}
+
+.submit{
+  width:100%;padding:17px;border:none;border-radius:100px;background:var(--title);color:#fff;
+  font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .25s;
+}
+.submit:hover{background:#333;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.15);}
+.submit:disabled{background:#999;cursor:default;transform:none;box-shadow:none;}
+.form-msg{margin-top:14px;font-size:13.5px;text-align:center;min-height:20px;}
+.form-msg.err{color:#c0392b;}
+.alt{margin-top:16px;text-align:center;font-size:13.5px;color:var(--muted);}
+.alt a{color:var(--title);font-weight:600;}
+
+.done{display:none;text-align:center;padding:56px 12px;}
+.done .ico{
+  width:64px;height:64px;border-radius:50%;background:var(--point-soft);margin:0 auto 20px;
+  display:flex;align-items:center;justify-content:center;
+}
+.done .ico svg{width:30px;height:30px;stroke:var(--point);}
+.done h2{font-size:24px;font-weight:800;color:var(--title);margin-bottom:10px;letter-spacing:-.5px;}
+.done p{font-size:15px;color:var(--body);margin-bottom:28px;}
+.done a{
+  display:inline-block;padding:13px 28px;border-radius:100px;background:var(--bg-card);
+  color:var(--title);font-weight:600;text-decoration:none;
+}
+
+/* ── Footer ── */
+footer{background:#0a0a0a;color:rgba(255,255,255,.55);padding:40px 6%;}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+.footer-logo{font-size:15px;font-weight:700;color:#fff;}
+.footer-logo .accent{color:#d4733a;}
+.footer-links{display:flex;gap:22px;flex-wrap:wrap;}
+.footer-links a{color:rgba(255,255,255,.58);text-decoration:none;font-size:13px;}
+.footer-links a:hover{color:#fff;}
+.footer-copy{width:100%;font-size:12px;color:rgba(255,255,255,.4);border-top:1px solid rgba(255,255,255,.07);padding-top:18px;margin-top:6px;}
+
+/* ── Tabs ── */
+.tabs{display:inline-flex;gap:6px;background:var(--bg-card);padding:6px;border-radius:100px;margin-top:32px;}
+.tab{
+  border:none;background:transparent;font-family:inherit;font-size:15px;font-weight:600;
+  color:var(--body);padding:11px 24px;border-radius:100px;cursor:pointer;transition:all .2s;
+}
+.tab:hover{color:var(--title);}
+.tab.active{background:var(--title);color:#fff;}
+@media(max-width:480px){.tabs{display:flex;}.tab{flex:1;padding:11px 10px;font-size:14px;}}
+[data-pane]{display:none;}
+[data-pane].show{display:block;}
+.side [data-pane].show{display:flex;flex-direction:column;gap:16px;}
+.seg.three{grid-template-columns:repeat(3,1fr);}
+@media(max-width:480px){.seg.three{grid-template-columns:1fr;}}
+
+/* ── Tally embed ── */
+.tally-wrap{position:relative;min-height:240px;}
+.tally-wrap iframe{display:block;border:0;width:100%;}
+.tally-pending{
+  display:none;flex-direction:column;gap:6px;text-align:center;
+  background:var(--bg-soft);border:1px dashed var(--border-strong);border-radius:16px;padding:48px 20px;
+}
+.tally-pending strong{font-size:16px;color:var(--title);}
+.tally-pending span{font-size:14px;color:var(--body);}
+.tally-pending a{color:var(--point);font-weight:700;text-decoration:none;}
+.tally-wrap.pending iframe{display:none;}
+.tally-wrap.pending .tally-pending{display:flex;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="" onerror="this.remove()">
+    <span><span class="accent">야무진</span> 이수진 노무사</span>
+  </a>
+  <a href="index.html" class="nav-back">← 홈으로</a>
+</nav>
+
+<!-- HEADER -->
+<header class="page-head">
+  <div class="page-head-inner">
+    <div class="crumb"><a href="index.html">홈</a> › <span id="crumbLabel">상담 신청</span></div>
+    <div data-pane="consult" class="show">
+      <h1>편하게 <em>현재 상황</em>을<br>들려주세요</h1>
+      <p>어디서부터 시작해야 할 지 몰라도 괜찮습니다.<br>신청서를 보내주시면 검토한 뒤 <strong>최대한 빠르게 연락</strong>드리겠습니다.</p>
+    </div>
+    <div data-pane="collab">
+      <h1>함께할 <em>교육·협업</em>을<br>기다립니다</h1>
+      <p>법정 의무교육, HR 담당자 교육, 기업 노무 컨설팅 등 협업을 제안해 주세요.<br>내용을 확인한 뒤 <strong>최대한 빠르게 회신</strong>드리겠습니다.</p>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="consult" role="tab">상담 신청</button>
+      <button class="tab" data-tab="collab" role="tab">협업·강의 문의</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="layout">
+
+    <!-- SIDE -->
+    <aside class="side">
+      <div data-pane="consult" class="show">
+        <div class="side-card">
+          <h4>상담 절차</h4>
+          <ol class="steps">
+            <li><span class="step-n">1</span><div><strong>상담 신청</strong><span>어떤 일이 있었는지 있는 그대로 적어주세요</span></div></li>
+            <li><span class="step-n">2</span><div><strong>검토 후 회신</strong><span>최대한 빠르게 연락드리겠습니다</span></div></li>
+            <li><span class="step-n">3</span><div><strong>초기 상담</strong><span>일정과 방식(전화·방문·온라인)은 협의해 정합니다</span></div></li>
+            <li><span class="step-n">4</span><div><strong>사건 검토</strong><span>예상 절차, 기간, 진행 여부를 안내드립니다</span></div></li>
+            <li><span class="step-n">5</span><div><strong>수임 계약</strong><span>업무 범위와 비용을 정한 뒤 착수합니다</span></div></li>
+          </ol>
+        </div>
+        <div class="side-card">
+          <h4>안내 사항</h4>
+          <ul class="notes">
+            <li>상담 일정은 회신 시 <strong>편하신 시간으로 협의</strong>하여 정합니다.</li>
+            <li>기업·근로자 양쪽 모두 상담 및 사건을 진행하고 있습니다. 다만 이미 상대방을 자문 중인 사건은 수임하지 않습니다.</li>
+            <li class="warn">기한이 임박한 사안이라면 신청서에 그 사실을 꼭 적어주세요.</li>
+          </ul>
+        </div>
+      </div>
+      <div data-pane="collab">
+        <div class="side-card">
+          <h4>진행 절차</h4>
+          <ol class="steps">
+            <li><span class="step-n">1</span><div><strong>문의 접수</strong><span>기관 정보와 원하시는 내용을 적어주세요</span></div></li>
+            <li><span class="step-n">2</span><div><strong>회신</strong><span>내용 확인 후 이메일 또는 전화로 연락드립니다</span></div></li>
+            <li><span class="step-n">3</span><div><strong>세부 협의</strong><span>주제, 대상, 일정, 비용을 함께 정합니다</span></div></li>
+            <li><span class="step-n">4</span><div><strong>진행</strong><span>맞춤 자료를 준비해 교육·컨설팅을 진행합니다</span></div></li>
+          </ol>
+        </div>
+        <div class="side-card">
+          <h4>이런 협업을 진행합니다</h4>
+          <ul class="notes">
+            <li>직장 내 괴롭힘·성희롱 예방, 장애인 인식개선, 개인정보보호 등 <strong>법정 의무교육</strong></li>
+            <li>HR 담당자 역량향상 교육, 신입사원 노동법 교육</li>
+            <li>임금·평가체계, 근무체계 개편 등 <strong>기업 노무 컨설팅</strong></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- FORMS (Tally) -->
+    <section class="form-card">
+      <div data-pane="consult" class="show">
+        <h2>상담 신청서</h2>
+        <p class="lead">관련 자료(근로계약서, 해고통지서, 급여명세서 등)도 신청서에서 바로 첨부하실 수 있어요.</p>
+        <div class="tally-wrap">
+          <iframe data-tally-src="https://tally.so/embed/Z9jrYz?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" title="상담 신청서"></iframe>
+          <div class="tally-pending">
+            <strong>신청서 연결 준비 중입니다</strong>
+            <span>지금은 <a href="mailto:cpla_sjlee@naver.com">cpla_sjlee@naver.com</a>으로 보내주세요.</span>
+          </div>
+        </div>
+        <p class="alt">폼 작성이 어려우시면 <a href="mailto:cpla_sjlee@naver.com">이메일</a>로 보내주셔도 됩니다</p>
+      </div>
+      <div data-pane="collab">
+        <h2>협업·강의 문의서</h2>
+        <p class="lead">강의 제안서나 참고 자료가 있다면 함께 첨부해 주세요.</p>
+        <div class="tally-wrap">
+          <iframe data-tally-src="https://tally.so/embed/0VQRJN?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0" title="협업·강의 문의서"></iframe>
+          <div class="tally-pending">
+            <strong>신청서 연결 준비 중입니다</strong>
+            <span>지금은 <a href="mailto:cpla_sjlee@naver.com">cpla_sjlee@naver.com</a>으로 보내주세요.</span>
+          </div>
+        </div>
+        <p class="alt">이메일 문의도 환영합니다 · <a href="mailto:cpla_sjlee@naver.com">cpla_sjlee@naver.com</a></p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><span class="accent">야무진</span> 이수진 노무사</div>
+    <div class="footer-links">
+      <a href="index.html#about">노무사 소개</a>
+      <a href="index.html#specialties">전문분야</a>
+      <a href="index.html#process">상담 절차</a>
+      <a href="contact.html#collab" data-tab-link="collab">협업·강의 문의</a>
+    </div>
+    <div class="footer-copy">© 2026 이수진 공인노무사</div>
+  </div>
+</footer>
+
+<script>
+const crumb = document.getElementById('crumbLabel');
+function showTab(name){
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('[data-pane]').forEach(p => p.classList.toggle('show', p.dataset.pane === name));
+  crumb.textContent = name === 'collab' ? '협업·강의 문의' : '상담 신청';
+  history.replaceState(null, '', name === 'collab' ? '#collab' : location.pathname);
+  if (window.Tally) Tally.loadEmbeds();
+}
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
+document.querySelectorAll('[data-tab-link]').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault(); showTab(a.dataset.tabLink); window.scrollTo({top:0,behavior:'smooth'});
+}));
+if (location.hash === '#collab') showTab('collab');
+
+document.querySelectorAll('iframe[data-tally-src]').forEach(f => {
+  if (f.dataset.tallySrc.includes('TALLY_')) f.parentElement.classList.add('pending');
+});
+</script>
+<script src="https://tally.so/widgets/embed.js" async onload="Tally.loadEmbeds()"></script>
+</body>
+</html>
